@@ -201,3 +201,13 @@ button {
 .countdown.hidden{
   opacity: 0;
 }
+
+
+#btnid {
+  position: fixed;
+  bottom: 10%;
+  font-family: Arial;
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+}

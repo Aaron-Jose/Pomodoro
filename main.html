@@ -3,7 +3,7 @@
     <head>
         <title>Pomodoro Timer</title>
         <link rel="stylesheet" type="text/css" href="style.css">
-        <script type="module" src="script.js"></script>
+        <script src="script.js"></script>
         <link rel="icon" type="" href="icon.png">
     </head>
     <body>
@@ -60,8 +60,18 @@ ps. the __days... is how many days till
 
         <div id="total-time">00:00</div>
 
+        <button id="btnid" onclick="goToAnalysis()">View Analysis</button>
+
+        <script>
+            function goToAnalysis() {
+              window.location.href = "./analysis/analysis.html";
+            }
+        </script>
+
         <div id="label-container">
             <p>website made by <b>Aaron Jose</b></p>
         </div>
+
+        
     </body>
 </html>

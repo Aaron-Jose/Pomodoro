@@ -1,12 +1,10 @@
-export let totalTime = 59;
-
-
 document.addEventListener('DOMContentLoaded', () => {
 
   const countDownDate = new Date("May 15, 2023").getTime(); // Change the date to whatever you want to count down to
   const countDownTitle = "days..."; // put whatever you want to count down to in the speech marks
   let timeLeft = 0; // 25 minutes in seconds
   let timerId;
+  let totalTime = 590;
   let isWorking = false; // keep track of whether we're in a work period or a break period
   let isLongBreak = false; // keep track of whether the next break period should be a long break
   let breakvar = 0;
@@ -71,6 +69,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       timeLeft--;
       totalTime++;
+      // Set a value in sessionStorage
+      sessionStorage.setItem('totaltime', totalTime);
+
 
       
       titleUpdate();
@@ -112,7 +113,6 @@ document.addEventListener('DOMContentLoaded', () => {
     clearInterval(timerId);
     timeLeft = timeStudy; // reset timer to 25 minutes
     titleid.innerHTML = "Press Start To Begin";
-    totalTime = 0;
     isWorking = true;
     isLongBreak = false;
     displayTime();
@@ -184,4 +184,67 @@ document.addEventListener('DOMContentLoaded', () => {
   displayTotalTime();
   countdown();
   
+  function getCurrentDate() {
+    const currentDate = new Date();
+    let year = currentDate.getFullYear();
+    let month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+    let day = currentDate.getDate().toString().padStart(2, '0');
+    return `${day}/${month}/${year}`;
+  }
+
+  // window.addEventListener('beforeunload', function (e) {
+  //   e.preventDefault(); // Cancel the event
+  //   e.returnValue = ''; // Set a blank return value
+  //   var myValue = sessionStorage.getItem('totaltime');
+  //   console.log(myValue);
+
+  //   const storedList = JSON.parse(localStorage.getItem('Pomodoro-Data')) || [];
+
+  //   // Append a new object to the array
+  //   storedList.push({ date: getCurrentDate(), time: myValue });
+
+  //   // Store the updated array back in localStorage as a JSON string
+  //   localStorage.setItem('Pomodoro-Data', JSON.stringify(storedList));
+  // });
+  
+  window.addEventListener('beforeunload', function (e) {
+    e.preventDefault(); // Cancel the event
+    e.returnValue = ''; // Set a blank return value
+    var myValue = sessionStorage.getItem('totaltime');
+    console.log(myValue);
+  
+    const currentDate = getCurrentDate();
+    let storedList = [];
+  
+    // Check if there is any data stored in localStorage for the Pomodoro-Data key
+    const storedData = localStorage.getItem('Pomodoro-Data');
+    if (storedData) {
+      try {
+        storedList = JSON.parse(storedData);
+      } catch (error) {
+        console.error('Error parsing stored data:', error);
+      }
+    }
+  
+    // Check if an entry for today already exists
+    const todayEntry = storedList.find(entry => entry.date === currentDate);
+  
+    if (todayEntry) {
+      // If an entry for today exists, add the new time value to the existing one
+      todayEntry.time = (parseFloat(todayEntry.time) + parseFloat(myValue)).toString();
+    } else {
+      // If an entry for today doesn't exist, append a new object to the array
+      storedList.push({ date: currentDate, time: myValue });
+    }
+    console.log(storedList);
+    // Store the updated array back in localStorage as a JSON string
+    localStorage.setItem('Pomodoro-Data', JSON.stringify(storedList));
+  });
+  
+  
+
+
+
+
+
 });
