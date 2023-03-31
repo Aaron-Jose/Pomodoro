@@ -1,13 +1,12 @@
 export let totalTime = 59;
 
+
 document.addEventListener('DOMContentLoaded', () => {
 
   const countDownDate = new Date("May 15, 2023").getTime(); // Change the date to whatever you want to count down to
   const countDownTitle = "days..."; // put whatever you want to count down to in the speech marks
-
   let timeLeft = 0; // 25 minutes in seconds
   let timerId;
-  let totalTime = 0;
   let isWorking = false; // keep track of whether we're in a work period or a break period
   let isLongBreak = false; // keep track of whether the next break period should be a long break
   let breakvar = 0;
@@ -22,9 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const titleContainer = document.querySelector(".title");
   const audio = new Audio('ding.wav'); // Replace 'path/to/sound.mp3' with the actual path to your sound file
   const music = new Audio('song.mp3');
-  const timeStudy = 25 * 60;
-  const timeSBreak = 5 * 60;
-  const timeLBreak = 35 * 60;
+  const timeStudy = 25 * 1;
+  const timeSBreak = 5 * 1;
+  const timeLBreak = 35 * 1;
   let mode = 'study';
 
   // Hide the Pause and Restart buttons initially
@@ -66,11 +65,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         displayTime();
         displayTotalTime();
-        startTimer(); // start the timer again with the new time period
+        startTimer();
+         // start the timer again with the new time period
       }
 
       timeLeft--;
       totalTime++;
+
+      
       titleUpdate();
     }, 1000);
 
@@ -90,7 +92,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
   }
-
 
   function pauseTimer() {
     clearInterval(timerId);
