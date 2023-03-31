@@ -1,15 +1,3 @@
-// // Get a value from localStorage
-// const myValue = JSON.parse(localStorage.getItem('Pomodoro-Data'));
-// times = myValue.map(item => item.time);
-// console.log(times);
-// const table = document.getElementById('myTable');
-// times.forEach(time => {
-//   const row = table.insertRow();
-//   const cell = row.insertCell();
-//   cell.textContent = time;
-// }); // Output: 'myValue'
-// document.getElementById("data").textContent = myValue
-
 document.addEventListener('DOMContentLoaded', function() {
   // Get the stored data from localStorage
   const storedData = localStorage.getItem('Pomodoro-Data');
@@ -49,36 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const times = data.map(entry => parseFloat(entry.time));
   
   const Thours = (times[0] / 3600).toFixed(2);
-  console.log(Thours + "h")
-  // Create a new Chart object with the canvas element
-  // const chart = new Chart(canvas, {
-  //   type: 'line',
-  //   data: {
-  //     labels: dates,
-  //     datasets: [{
-  //       label: 'Time Studied',
-  //       data: times,
-  //       borderColor: 'blue',
-  //       fill: false
-  //     }]
-  //   },
-  //   options: {
-  //     scales: {
-  //       yAxes: [{
-  //         ticks: {
-  //           beginAtZero: true,
-  //           callback: function(value, index, values) {
-  //             return (value / 3600).toFixed(2) + 'h';
-  //           }
-  //         },
-  //         scaleLabel: {
-  //           display: true,
-  //           labelString: 'Time (hours)'
-  //         }
-  //       }]
-  //     }
-  //   }
-  // });
+  console.log(times[0])
 
   // Load the Google Charts library
   google.charts.load('current', {'packages':['corechart']});

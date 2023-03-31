@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const countDownTitle = "days..."; // put whatever you want to count down to in the speech marks
   let timeLeft = 0; // 25 minutes in seconds
   let timerId;
-  let totalTime = 590;
+  let totalTime = 600;
   let isWorking = false; // keep track of whether we're in a work period or a break period
   let isLongBreak = false; // keep track of whether the next break period should be a long break
   let breakvar = 0;
@@ -19,9 +19,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const titleContainer = document.querySelector(".title");
   const audio = new Audio('ding.wav'); // Replace 'path/to/sound.mp3' with the actual path to your sound file
   const music = new Audio('song.mp3');
-  const timeStudy = 25 * 1;
-  const timeSBreak = 5 * 1;
-  const timeLBreak = 35 * 1;
+  const timeStudy = 25 * 60;
+  const timeSBreak = 5 * 60;
+  const timeLBreak = 35 * 60;
   let mode = 'study';
 
   // Hide the Pause and Restart buttons initially
@@ -191,21 +191,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let day = currentDate.getDate().toString().padStart(2, '0');
     return `${day}/${month}/${year}`;
   }
-
-  // window.addEventListener('beforeunload', function (e) {
-  //   e.preventDefault(); // Cancel the event
-  //   e.returnValue = ''; // Set a blank return value
-  //   var myValue = sessionStorage.getItem('totaltime');
-  //   console.log(myValue);
-
-  //   const storedList = JSON.parse(localStorage.getItem('Pomodoro-Data')) || [];
-
-  //   // Append a new object to the array
-  //   storedList.push({ date: getCurrentDate(), time: myValue });
-
-  //   // Store the updated array back in localStorage as a JSON string
-  //   localStorage.setItem('Pomodoro-Data', JSON.stringify(storedList));
-  // });
   
   window.addEventListener('beforeunload', function (e) {
     e.preventDefault(); // Cancel the event
@@ -241,10 +226,4 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('Pomodoro-Data', JSON.stringify(storedList));
   });
   
-  
-
-
-
-
-
 });
