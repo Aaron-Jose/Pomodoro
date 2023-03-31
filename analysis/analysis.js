@@ -36,9 +36,6 @@ document.addEventListener('DOMContentLoaded', function() {
   const dates = data.map(entry => entry.date);
   const times = data.map(entry => parseFloat(entry.time));
   
-  const Thours = (times[0] / 3600).toFixed(2);
-  console.log(times[0])
-
   // Load the Google Charts library
   google.charts.load('current', {'packages':['corechart']});
 
