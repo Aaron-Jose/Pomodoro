@@ -4,7 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const countDownTitle = "days..."; // put whatever you want to count down to in the speech marks
   let timeLeft = 0; // 25 minutes in seconds
   let timerId;
-  let totalTime = 600;
+  let totalTime = 0;
+  sessionStorage.setItem('totaltime', totalTime);
   let isWorking = false; // keep track of whether we're in a work period or a break period
   let isLongBreak = false; // keep track of whether the next break period should be a long break
   let breakvar = 0;
@@ -192,9 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return `${day}/${month}/${year}`;
   }
   
-  window.addEventListener('beforeunload', function (e) {
-    e.preventDefault(); // Cancel the event
-    e.returnValue = ''; // Set a blank return value
+  window.addEventListener('unload', function () {
     var myValue = sessionStorage.getItem('totaltime');
     console.log(myValue);
   
@@ -216,7 +215,11 @@ document.addEventListener('DOMContentLoaded', () => {
   
     if (todayEntry) {
       // If an entry for today exists, add the new time value to the existing one
-      todayEntry.time = (parseFloat(todayEntry.time) + parseFloat(myValue)).toString();
+      const newValue = parseFloat(myValue);
+      const currentTotal = parseFloat(todayEntry.time);
+      if (!isNaN(newValue) && !isNaN(currentTotal)) {
+        todayEntry.time = (currentTotal + newValue).toString();
+      }
     } else {
       // If an entry for today doesn't exist, append a new object to the array
       storedList.push({ date: currentDate, time: myValue });
@@ -224,6 +227,8 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log(storedList);
     // Store the updated array back in localStorage as a JSON string
     localStorage.setItem('Pomodoro-Data', JSON.stringify(storedList));
+    
   });
+  
   
 });

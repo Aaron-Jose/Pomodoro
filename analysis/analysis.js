@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
   // Get the stored data from localStorage
   const storedData = localStorage.getItem('Pomodoro-Data');
+  console.log(storedData)
 
   // Check if storedData is null before using it
   if (storedData) {
